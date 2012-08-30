@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="application" projectOutput="$(workspace_dir)/output" facebookAppID="" projectArtefact="tennislab" appFile="./tennislab.app">
+  <conditionDefines />
+  <NewSkin>true</NewSkin>
+  <fileProperties>
+    <property path="./matchpoint.net.mobile/jobForm.ms" isDirectory="false" excluded="false">
+      <conditions />
+    </property>
+    <property path="./TopSpinJobs/aboutForm.ms" isDirectory="false" excluded="false">
+      <conditions />
+    </property>
+    <property path="./TopSpinJobs/buyForm.ms" isDirectory="false" excluded="false">
+      <conditions />
+    </property>
+    <property path="./tennislab/accountLoginControl.ms" isDirectory="false" excluded="false">
+      <conditions />
+    </property>
+  </fileProperties>
+  <devices>
+    <device targetPlatform="100">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="alias" value="" />
+        <property name="keystore" value="" />
+        <property name="keypassword" value="" />
+        <property name="storepassword" value="" />
+        <property name="supportedDevices" value="universal" />
+        <property name="permission" value="&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;" />
+      </publishProperties>
+      <includes>
+        <fonts>
+          <string>Ubuntu-B.ttf</string>
+          <string>Ubuntu-R.ttf</string>
+        </fonts>
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="150">
+      <publishProperties>
+        <property name="icon" value="$(project_dir)/platform/tenislab_icon_retina_iphone.png" />
+        <property name="splash" value="$(project_dir)/platform/splash_ipad.png" />
+        <property name="alias" value="" />
+        <property name="keystore" value="" />
+        <property name="keypassword" value="" />
+        <property name="storepassword" value="" />
+        <property name="supportedDevices" value="armv7a" />
+        <property name="installLocation" value="preferExternal" />
+        <property name="permission" value="&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;" />
+      </publishProperties>
+      <includes>
+        <fonts>
+          <string>Ubuntu-B.ttf</string>
+          <string>Ubuntu-R.ttf</string>
+        </fonts>
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="300">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="codeSigningIdentity" value="iPhone Distribution: Quellement Inc." />
+        <property name="supportedDevices" value="universal" />
+        <property name="icon3gs" value="" />
+        <property name="icon4+" value="$(project_dir)/platform/tenislab_icon_retina_iphone.png" />
+        <property name="iconTablet" value="$(project_dir)/platform/tenislab_icon_ipad.png" />
+        <property name="splash3gs" value="" />
+        <property name="splash4+" value="$(project_dir)/platform/splash_iphone.png" />
+        <property name="splashTablet" value="$(project_dir)/platform/splash_ipad.png" />
+        <property name="bundleIdentifier" value="com.quellement.tennislab" />
+      </publishProperties>
+      <includes>
+        <fonts>
+          <string>Ubuntu-B.ttf</string>
+          <string>Ubuntu-R.ttf</string>
+        </fonts>
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="200">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="manifest" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="201">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="manifest" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="450">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="applicationId" value="" />
+        <property name="certificate" value="" />
+        <property name="key" value="" />
+        <property name="password" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="520">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="203">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="manifest" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="600">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="700">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+  </devices>
+</Project>

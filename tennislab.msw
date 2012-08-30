@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fileExplorerPath="/Users/oxy/Work/moscrif-docs-api/input/native" vertBodyHeight="686" horzMiddleBodyHeight="333" vertOutputWidth="1002" name="matchpoint.net.mobile" outputDir="$(workspace_dir)/output" tag="0" signapp="false" showLeftPane="true" showRightPane="true" showBottomPane="true" selectedProject="/Users/oxy/Work/moscrif-apps/tennislab/tennislab.msp" showalllibs="false" selectedResolution="/Applications/MoscrifIDE.app/Contents/Resources/cfg/displays/noskin_wvga.ini" selectedDevices="100">
+  <projects>
+    <project>./tennislab.msp</project>
+  </projects>
+  <opened>
+    <file>StartPage</file>
+  </opened>
+</Workspace>
