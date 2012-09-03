@@ -19,14 +19,14 @@
   <devices>
     <device targetPlatform="100">
       <publishProperties>
-        <property name="icon" value="" />
-        <property name="splash" value="" />
+        <property name="icon" value="$(project_dir)/platform/tenislab_icon_retina_iphone.png" />
+        <property name="splash" value="$(project_dir)/platform/splash_ipad.png" />
         <property name="alias" value="" />
         <property name="keystore" value="" />
         <property name="keypassword" value="" />
         <property name="storepassword" value="" />
         <property name="supportedDevices" value="universal" />
-        <property name="permission" value="&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;" />
+        <property name="permission" value="&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;" />
       </publishProperties>
       <includes>
         <fonts>
