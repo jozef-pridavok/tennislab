@@ -39,7 +39,7 @@ class JobForm : Form
         this.add(new TitleBar({
             text: "Job",
             leftItems: [new TitleItem({text:"Back", kind:#back, onClick:::Application.instance.pop(new SlideToRight())})],
-            rightItems: [new TitleItem({text:"Apply", onClick:::Application.instance.pop(new SlideToRight())})]
+            //rightItems: [new TitleItem({text:"Apply", onClick:::Application.instance.pop(new SlideToRight())})]
         }));
 
         this._detail = new Control({name:"detail", onDraw:function(canvas) { this super._drawDetail(canvas); }, stretch:true });

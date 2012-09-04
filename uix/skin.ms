@@ -176,9 +176,9 @@ class Skin : BaseClass
         assert textBox instanceof TextBox;
         var bg = TextBox.style.background.native;
         var fg = TextBox.style.foreground.native;
-        var radius = System.width / 100;
-        canvas.drawRoundRect(0, 0, textBox.width, textBox.height, radius, radius, bg);
-        canvas.drawRoundRect(0, 0, textBox.width, textBox.height, radius, radius, fg);
+        var radius = System.width / 40;
+        canvas.drawRoundRect(1, 1, textBox.width - 1, textBox.height - 1, radius, radius, bg);
+        canvas.drawRoundRect(1, 1, textBox.width - 1, textBox.height - 1, radius, radius, fg);
     }
 
     // @endregion
@@ -242,8 +242,9 @@ TabItem.style = {
 }
 
 TextBox.style = {
+    height: System.height / 10,
     background: new Background({color: 0xffffffff}),
-    foreground: new Foreground({color: 0xff000000, fontSize: System.height/45, style: #stroke}),
+    foreground: new Foreground({color: 0xff000000, fontSize: System.height/35, style: #stroke}),
 }
 
 // @endregion

@@ -6,4 +6,5 @@
        homepage: 
            uses: core ui uix sql net graphics store crypto
     orientation: portrait
-        version: 1.0
+ remote-console: 
+        version: 1.1

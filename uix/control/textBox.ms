@@ -14,7 +14,7 @@ class TextBox : Control
         this._editor.autoSize = #width;
         this._editor.left = this._editor.top = 0;
         this._editor.width = 100;
-        this._editor.height = 100;
+        this._editor.height = this._view.height = this.options.height || TextBox.style.height;
         this._editor.paint = TextBox.style.foreground.native
         this._editor.marginX = this._editor.marginY = System.width / 50;
         //this._editor.onDraw = function(s, c) {
