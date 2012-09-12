@@ -15,7 +15,7 @@ class EmployeeForm : Form
     var silverPaint = ColorPaint.create(0xff9d9d9d);
     var blackPaint = ColorPaint.create(0xff000000);
 
-    var space = System.width / 15;
+    var space = System.height / 20;
 
     function create(options = {})
     {

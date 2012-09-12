@@ -42,8 +42,13 @@ class TopSpinSkin : Skin
         canvas.drawRect(0, titleBar.height-6, titleBar.width, titleBar.height, border);
         if (titleBar.text.length > 0) {
             var (tw, th) = fg.measureText(titleBar.text);
-            var offset = titleBar.titleOffset || 0;
-            canvas.drawText(titleBar.text, (titleBar.width - tw) / 2 - offset, (titleBar.height + th) / 2, fg);
+            var (left, right) = titleBar.labelLimits();
+            var offset, align = titleBar.labelAlign || #center;
+            if (align == #left) offset = left;
+            else if (align == #right) offset = right - tw;
+            else if (align == #center) offset = left + (right - left)/2 - tw/2;
+            else if (align == #screen) offset = System.width/2 - tw/2;
+            canvas.drawText(titleBar.text, offset, (titleBar.height + th) / 2, fg);
         }
     }
 
@@ -99,13 +104,15 @@ class TopSpinSkin : Skin
 
 }
 
+Label.style.foreground = new Foreground({color: 0xff000000, fontSize: System.height/30});
+
 Button.style.foreground = new Foreground({color: 0xffffffff, fontSize: System.height/30});
 Button.style.pressed.foreground = Button.style.foreground;
 TitleBar.style.foreground = new Foreground({color: 0xff00ffff, fontSize: System.height/20});
 TitleBar.style.gradient = new Gradient({kind: #linear, points:{start:{x:0,y:0}, end:{x:0,y:System.height/20}}, colors:[0xff424242, 0xff262626], positions:[0.0, 1.0]});
 TitleBar.style.border = new Foreground({color: 0xff505032});
 TitleItem.style.foreground = new Foreground({color: 0xff000000, fontSize: System.height/30});
-TitleItem.style.padding = System.width / 20;
+TitleItem.style.padding = System.width / 30;
 ListItem.style.background = new Background({color: 0x00ffffff});
 ListItem.style.foreground = new Foreground({color: 0xff000000, fontSize: System.height/30});
 ListItem.style.foreground2 = new Foreground({color: 0xff000000, fontSize: System.height/50});

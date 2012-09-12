@@ -30,9 +30,12 @@ class JobsForm : Form
         super.init();
         this._list = new ListView({name:"listView", stretch: #both});
         this.add(new TitleBar({name:"titleBar", text:"Jobs",
-            titleOffset: System.width/12,
+            //titleOffset: System.width/12,
+            //labelAlign: #center,
             leftItems: [new TitleItem({image:Res.img.info, onClick:::this super._showAbout()})],
-            rightItems: [new TitleItem({text:"Account", onClick:::this super._showAccount()})]
+            rightItems: [new TitleItem({text:"Account", onClick:::this super._showAccount()})
+                //, new TitleItem({text:"Account", onClick:::this super._showAccount()})
+                ]
         }));
         this.add(this._list);
     }

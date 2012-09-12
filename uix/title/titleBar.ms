@@ -3,6 +3,7 @@ include "lib://uix/control.ms"
 include "lib://uix/title/titleItem.ms"
 include "lib://uix/layout/gridLayout.ms"
 include "lib://uix/layout/flowLayout.ms"
+include "lib://uix/skin.ms"
 
 class TitleBar : Control
 {
@@ -22,7 +23,7 @@ class TitleBar : Control
             this super._layout.performLayout(sender, sender);
         }
 
-        this._layout = new GridLayout({rows: 1, columns: 3});
+        this._layout = new TitleBarLayout({owner: this});
 
         this._leftItems = [];
         this._rightItems = [];
@@ -33,10 +34,12 @@ class TitleBar : Control
         super.afterInit();
 
         if (this._leftItems.length > 0)
-            this._updatePane(#left);
+            this._updateItems(#left);
 
         if (this._rightItems.length > 0)
-            this._updatePane(#right);
+            this._updateItems(#right);
+
+        //this.native.add(new Label({name:"title", text:this.options.text, side:#title}));
 
         this.performLayout();
     }
@@ -51,7 +54,7 @@ class TitleBar : Control
         set {
             this._leftItems = v;
             if (this.initialized)
-                this._updatePane(#left);
+                this._updateItems(#left);
         }
     }
 
@@ -61,7 +64,7 @@ class TitleBar : Control
         set {
             this._rightItems = v;
             if (this.initialized)
-                this._updatePane(#right);
+                this._updateItems(#right);
         }
     }
 
@@ -77,15 +80,71 @@ class TitleBar : Control
 
     // @endregion
 
-    function add(item, side = #right)
+    // @region Layout
+
+    class TitleBarLayout : Layout
+    {
+        function init()
+        {
+            this._owner = this.options.titleBar;
+        }
+    
+        function afterInit()
+        {
+            super.afterInit();
+            this._padding = this.options.padding || TitleBar.style.padding;
+        }
+    
+        property padding(v)
+        {
+            get return this._padding;
+            set this._padding = v;
+        }
+    
+        function performLayout(parent, children)
+        {
+            super.performLayout(parent, children);
+            var leftItems = [];
+            var rightItems = [];
+            var label = null
+            for (var child in children) {
+                if (child.side == #left)
+                    leftItems.push(child);
+                if (child.side == #right)
+                    rightItems.push(child);
+                if (child.side == #title)
+                    label = child;
+            }
+            var labelStart = 0;
+            var labelEnd = 0;
+            var x = this._padding;
+            for (var child in leftItems) {
+                child.setPosition(x, this._padding);
+                child.height = parent.height - 2 * this._padding;
+                x += child.width + this._padding;
+            }
+            labelStart = x;
+            x = parent.width - this._padding;
+            for (var child in rightItems) {
+                child.setPosition(x - child.width, this._padding);
+                child.height = parent.height - 2 * this._padding;
+                x -= child.width + this._padding;
+            }
+            labelEnd = x;
+            if (label) {
+                label.setPosition(labelStart, this._padding);
+                label.setSize(labelEnd - labelStart, parent.height - 2 * this._padding);
+            }
+        }
+    }
+    // @endregion
+
+    function add(item, side)
     {
         assert item instanceof TitleItem || typeof item == #string || typeof item == #symbol : String.printf("typeof item = %s", typeof item);
         assert side == #left || side == #right;
-        var pane = this._getPane(side);
-        pane.add(this._createItem(pane, item), #front);
-        //pane.performLayout();
-        //var (mw, mh) = pane.layout.getPackedBounds(pane._view);
-        //pane.width = 100;//mw;
+        this.native.add(this._createItem(item, side), #front);
+        this.performLayout();
     }
 
     function removeAll()
@@ -100,7 +159,7 @@ class TitleBar : Control
 
     // @region implementation
 
-    function _createItem(pane, item)
+    function _createItem(item, side)
     {
         if (item instanceof TitleItem)
             ;
@@ -110,59 +169,39 @@ class TitleBar : Control
             item = new TitleItem({text: "icon"});
         else
             assert false;
-        item.height = pane.height - (2 * pane.layout.vertPadding);
+        item.side = side;
+        //item.height = pane.height - (2 * pane.layout.vertPadding);
         return item;
     }
 
-    function _createPane(side)
+    function _updateItems(side)
     {
-        var pane = new Control({name: side.toString() + "Pane", layout: new FlowLayout({vertPadding:this.height/8, horzPadding:this.height/8, horzAlign: side})});
-        //pane.onDraw = function(canvas) {
-        //    canvas.drawRect(0, 0, this.width, this.height, ColorPaint.stock().white);
-        //}
-        pane.gridLayout = {column: (side == #left ? 0 : 2) };
-        return pane;
-    }
-
-    function _getPane(side)
-    {
+        this.suspendLayout();
         if (side == #right) {
-            if (this._right == null) {
-                this._right = this._createPane(side);
-                this._view.add(this._right);
-                this.performLayout();
-            }
-            return this._right;
-        }
-        if (side == #left) {
-            if (this._left == null) {
-                this._left = this._createPane(side);
-                this._view.add(this._left);
-                this.performLayout();
-            }
-            return this._left;
-        }
-        assert false;
-    }
-
-    function _updatePane(side)
-    {
-        if (side == #right) {
-            if (this._rightItems.length == 0 && this._right) {
-                this._right.detach();
-                this._right = null;
-            }
             for (var i in this._rightItems)
                 this.add(i, side);
         }
         if (side == #left) {
-            if (this._leftItems.length == 0 && this._left) {
-                this._left.detach();
-                this._left = null;
-            }
             for (var i in this._leftItems)
                 this.add(i, side);
         }
+        this.resumeLayout(false);
+    }
+
+    function labelLimits()
+    {
+        var left = 0, right = this.width;
+        for (var i in this._leftItems) {
+            var cr = i.left + i.width + this._layout.padding;
+            if (cr > left)
+                left = cr;
+        }
+        for (var i in this._rightItems) {
+            var cl = i.left - this._layout.padding;
+            if (cl < right)
+                right = cl;
+        }
+        return (left, right);
     }
 
     // @endregion

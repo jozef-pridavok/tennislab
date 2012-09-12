@@ -1,6 +1,7 @@
 include "lib://core/baseClass.ms"
 include "lib://graphics/foreground.ms"
 include "lib://graphics/background.ms"
+include "lib://uix/form.ms"
 include "lib://uix/list/listView.ms"
 include "lib://uix/list/listItem.ms"
 include "lib://uix/title/titleBar.ms"
@@ -30,16 +31,18 @@ class Skin : BaseClass
 
     // @region Control, Form, Application
 
-    function drawApplication(canvas, application)
-    {
-    }
-
     function drawControl(canvas, control)
     {
+        assert control instanceof Control;
+        if (Control.style.background instanceof Background)
+            Control.style.background.draw(canvas, control);
     }
 
     function drawForm(canvas, form)
     {
+        assert form instanceof Form;
+        if (Form.style.background instanceof Background)
+            Form.style.background.draw(canvas, form);
     }
 
     // @region Button
@@ -59,13 +62,8 @@ class Skin : BaseClass
     function drawLabel(canvas, label)
     {
         assert label instanceof Label;
-        var style = Label.style;
-        if (style.background) {
-            var bg = style.background.native;
-            canvas.drawRect(0, 0, label.width, label.height, bg);
-        }
-        //var fg = style.foreground.native;
-        //canvas.drawTextBox(label.text, 0, 0, label.width, label.height, fg, label.vertAlign);
+        if (Label.style.background instanceof Background)
+            Label.style.background.draw(canvas, label);
     }
 
     // @endregion
@@ -76,6 +74,9 @@ class Skin : BaseClass
 
     function drawListView(canvas, list)
     {
+        assert list instanceof ListView;
+        if (ListView.style.background instanceof Background)
+            ListView.style.background.draw(canvas, list);
     }
 
     function drawListItem(canvas, listItem)
@@ -104,7 +105,13 @@ class Skin : BaseClass
         canvas.drawLine(0, titleBar.height, titleBar.width, titleBar.height, fg);
         if (titleBar.text.length > 0) {
             var (tw, th) = fg.measureText(titleBar.text);
-            canvas.drawText(titleBar.text, (titleBar.width - tw) / 2, (titleBar.height + th) / 2, fg);
+            var (left, right) = titleBar.labelLimits();
+            var offset, align = titleBar.labelAlign || #center;
+            if (align == #left) offset = left;
+            else if (align == #right) offset = right - tw;
+            else if (align == #center) offset = left + (right - left)/2 - tw/2;
+            else if (align == #screen) offset = System.width/2 - tw/2;
+            canvas.drawText(titleBar.text, offset, (titleBar.height + th) / 2, fg);
         }
     }
 
@@ -114,12 +121,13 @@ class Skin : BaseClass
         var bg = TitleItem.style.background.native;
         var fg = TitleItem.style.foreground.native;
         var radius = System.width / 100;
-        canvas.drawRect(0, 0, titleItem.width, titleItem.height, bg);
-        canvas.drawRoundRect(0, 0, titleItem.width, titleItem.height, radius, radius, fg);
+        //canvas.drawRect(0, 0, titleItem.width, titleItem.height, bg);
+        canvas.drawRoundRect(0, 0, titleItem.width, titleItem.height, radius, radius, bg);
         var delta = titleItem.pressed ? Skin.pressedDelta : 0;
         if (titleItem.text.length > 0) {
             var text = titleItem.text;
             var (tw, th) = fg.measureText(text);
+            th -= fg.fontDescent;
             canvas.drawText(text, (titleItem.width - tw) / 2 + delta, (titleItem.height + th) / 2 + delta, fg);
         } else if (titleItem.icon instanceof Bitmap) {
 
@@ -186,14 +194,22 @@ class Skin : BaseClass
 
 // @region Styles
 
+Form.style = {
+    background: null
+}
+
+Control.style = {
+    background: new Background({color: 0xffffffff}),
+}
+
 Button.style = {
     width: System.width / 8,
     height: System.height / 9,
-    background: new Background({color: 0xffffffff}),
-    foreground: new Foreground({color: 0xff000000, fontSize: System.height/30}),
+    background: new Background({color: 0xff000000}),
+    foreground: new Foreground({color: 0xffffffff, fontSize: System.height/30}),
     pressed: {
-        background: new Background({color: 0xff000000}),
-        foreground: new Foreground({color: 0xffffffff, fontSize: System.height/30}),
+        background: new Background({color: 0xff000000, style:#stroke}),
+        foreground: new Foreground({color: 0xff000000, fontSize: System.height/30}),
     }
 }
 
@@ -202,6 +218,10 @@ Label.style = {
     height: System.height / 9,
     background: null,
     foreground: new Foreground({color: 0xff000000, fontSize: System.height/30}),
+}
+
+ListView.style = {
+    background: new Background({color: 0xffffffff}),
 }
 
 ListItem.style = {
@@ -218,6 +238,7 @@ ListItem.style = {
 TitleBar.style = {
     width: System.width,
     height: System.height / 9,
+    padding: System.height / 75,
     background: new Background({color: 0xffffffff}),
     foreground: new Foreground({color: 0xff000000, fontSize: System.height/20}),
 }
@@ -225,7 +246,7 @@ TitleBar.style = {
 TitleItem.style = {
     width: System.width / 10,
     height:  50,//System.height / 10,
-    background: new Background({color: 0xff44aa99}),
+    background: new Background({color: 0xff000000, style:#stroke}),
     foreground: new Foreground({color: 0xff000000, fontSize: System.height/45, style: #stroke}),
     padding: System.width / 100
 }
@@ -236,7 +257,7 @@ TabBar.style = {
 }
 
 TabItem.style = {
-    background: new Background({color: 0xff44aa99}),
+    background: new Background({color: 0xff000000}),
     foreground: new Foreground({color: 0xff000000, fontSize: System.height/45, style: #stroke}),
     padding: System.width / 100
 }

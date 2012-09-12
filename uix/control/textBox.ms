@@ -79,16 +79,6 @@ class TextBox : Control
         this.add(this._editor);
     }
 
-    /*
-    property text(v)
-    {
-        get return (this._isEmpty ? "" : this._editor.text);
-        set {
-            this._editor.text = (v == "") ? this._hint : v;
-            this._isEmpty = (this._editor.text == "") ? true : false;
-        }
-    }
-    */
     property text(v)
     {
         get return (this._isEmpty ? "" : this._text);

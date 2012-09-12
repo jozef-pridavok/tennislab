@@ -10,6 +10,8 @@ include "app://data/accountWebService.ms"
 include "app://data/jobsWebService.ms"
 include "app://data/adsWebService.ms"
 
+//logI(System.applicationId, System.appVersionMajor, System.appVersionMinor);
+
 function handleError(errorCode, errorMassage)
 {
     if (errorCode < 0)

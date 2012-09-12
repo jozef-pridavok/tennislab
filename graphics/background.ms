@@ -99,4 +99,9 @@ class Background : BaseClass
             this._paint.colorFilter = v;
         }
     }
+
+    function draw(canvas, control)
+    {
+        canvas.drawRect(0, 0, control.width, control.height, this._paint);
+    }
 }

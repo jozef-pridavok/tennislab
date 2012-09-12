@@ -7,4 +7,4 @@
            uses: core ui uix sql net graphics store crypto
     orientation: portrait
  remote-console: 
-        version: 1.1
+        version: 1.2

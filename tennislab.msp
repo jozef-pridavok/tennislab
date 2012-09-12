@@ -15,6 +15,12 @@
     <property path="./tennislab/accountLoginControl.ms" isDirectory="false" excluded="false">
       <conditions />
     </property>
+    <property path="./tennislab/jobForm.ms" isDirectory="false" excluded="false">
+      <conditions />
+    </property>
+    <property path="./tennislab/settings.dat" isDirectory="false" excluded="true">
+      <conditions />
+    </property>
   </fileProperties>
   <devices>
     <device targetPlatform="100">
@@ -60,7 +66,7 @@
       <publishProperties>
         <property name="icon" value="" />
         <property name="splash" value="" />
-        <property name="codeSigningIdentity" value="iPhone Distribution: Quellement Inc." />
+        <property name="codeSigningIdentity" value="iPhone Developer: Jozef Pridavok (ENR9MZF3YM)" />
         <property name="supportedDevices" value="universal" />
         <property name="icon3gs" value="" />
         <property name="icon4+" value="$(project_dir)/platform/tenislab_icon_retina_iphone.png" />

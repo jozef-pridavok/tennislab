@@ -1,15 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Workspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fileExplorerPath="/Users/oxy/Work/moscrif-docs-api/input/native" vertBodyHeight="686" horzMiddleBodyHeight="333" vertOutputWidth="1002" name="matchpoint.net.mobile" outputDir="$(workspace_dir)/output" tag="0" signapp="false" showLeftPane="true" showRightPane="true" showBottomPane="true" selectedProject="/Users/oxy/Work/moscrif-apps/tennislab/tennislab.msp" showalllibs="false" selectedResolution="/Applications/MoscrifIDE.app/Contents/Resources/cfg/displays/noskin_xga.ini" selectedDevices="100">
+<Workspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" fileExplorerPath="/Users/oxy/Work/moscrif-publish/android_2_2" vertBodyHeight="668" horzMiddleBodyHeight="333" vertOutputWidth="868" name="matchpoint.net.mobile" outputDir="$(workspace_dir)/output" tag="0" signapp="false" showLeftPane="true" showRightPane="true" showBottomPane="true" selectedProject="/Users/oxy/Work/moscrif-apps/tennislab/tennislab.msp" showalllibs="false" selectedResolution="/Applications/MoscrifIDE.app/Contents/Resources/cfg/displays/noskin_wvga.ini" selectedDevices="150">
   <projects>
     <project>./tennislab.msp</project>
   </projects>
   <opened>
     <file>StartPage</file>
-    <file>/Users/oxy/Work/moscrif-apps/tennislab/tennislab/main.ms</file>
-    <file>/Users/oxy/Work/moscrif-apps/tennislab/tennislab/topSpinSkin.ms</file>
-    <file>/Users/oxy/Work/moscrif-apps/tennislab/uix/control/textBox.ms</file>
-    <file>/Users/oxy/Work/moscrif-apps/tennislab/uix/control/label.ms</file>
-    <file>/Users/oxy/Work/moscrif-apps/tennislab/uix/skin.ms</file>
-    <file>/Users/oxy/Work/moscrif-apps/tennislab/tennislab/jobForm.ms</file>
+    <file>/Users/oxy/Work/moscrif-apps/tennislab/uix/title/titleBar.ms</file>
   </opened>
 </Workspace>

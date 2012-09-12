@@ -285,7 +285,8 @@ logI(k, v);
 
     function drawDefault(canvas)
     {
-        return Application.skin.drawApplication(canvas, this);
+        canvas.clear(0xffffffff);
+        //return Application.skin.drawApplication(canvas, this);
     }
 
     function invalidate()

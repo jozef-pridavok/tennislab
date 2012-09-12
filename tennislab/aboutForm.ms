@@ -27,7 +27,7 @@ class AboutForm : Form
         const padding = System.width/30;
 
         this.add(new TitleBar({
-            text: "About",
+            text: "About", labelAlign:#screen,
             rightItems: [new TitleItem({text:"Done", onClick:::Application.instance.pop(new SlideToLeft())})]
         }));
 

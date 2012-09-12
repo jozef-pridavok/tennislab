@@ -42,7 +42,7 @@ class TitleItem : Control
             if (this.initialisation)
                 return;
             var (w, h) = TitleItem.style.foreground.measureText(v);
-            this.width = w+ 2 * TitleItem.style.padding;
+            this.width = w + 2 * TitleItem.style.padding;
             this.invalidate();
         }
     }
