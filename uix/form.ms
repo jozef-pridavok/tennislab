@@ -130,5 +130,12 @@ class Form : Control
         this._view.add(control, #front);
     }
 
+    function orientationChanged(orientation)
+    {
+        this._view.width = System.width;
+        this._view.height = System.height;
+        this.performLayout(true);
+    }
+
 }
 

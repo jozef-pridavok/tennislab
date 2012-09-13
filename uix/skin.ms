@@ -3,9 +3,8 @@ include "lib://graphics/foreground.ms"
 include "lib://graphics/background.ms"
 include "lib://uix/form.ms"
 include "lib://uix/list/listView.ms"
-include "lib://uix/list/listItem.ms"
+include "lib://uix/tile/tileView.ms"
 include "lib://uix/title/titleBar.ms"
-include "lib://uix/title/titleItem.ms"
 include "lib://uix/tab/tabBar.ms"
 include "lib://uix/tab/tabItem.ms"
 include "lib://uix/control/button.ms"
@@ -30,6 +29,10 @@ class Skin : BaseClass
     }
 
     // @region Control, Form, Application
+
+    function drawApplication(canvas, application)
+    {
+    }
 
     function drawControl(canvas, control)
     {
@@ -90,6 +93,29 @@ class Skin : BaseClass
         canvas.drawRect(0, 0, listItem.width, listItem.height, bg);
         canvas.drawText(listItem.text, 10 + delta, (listItem.height + th) / 2 + delta, fg);
         canvas.drawLine(0, listItem.height, listItem.width, listItem.height, fg);
+    }
+
+    // @endregion
+
+    // @region TileView
+
+    function drawTileView(canvas, tiles)
+    {
+        assert tiles instanceof TileView;
+        if (TileView.style.background instanceof Background)
+            TileView.style.background.draw(canvas, tiles);
+    }
+
+    function drawTileItem(canvas, tileItem)
+    {
+        assert tileItem instanceof TileItem;
+        var style = tileItem.pressed ? TileItem.style.pressed : TileItem.style;
+        var bg = style.background.native;
+        var fg = style.foreground.native;
+        var (tw, th) = fg.measureText(tileItem.text);
+        var delta = tileItem.pressed ? Skin.pressedDelta : 0;
+        canvas.drawRect(0, 0, tileItem.width, tileItem.height, bg);
+        canvas.drawText(tileItem.text, 10 + delta, (tileItem.height + th) / 2 + delta, fg);
     }
 
     // @endregion
@@ -228,6 +254,21 @@ ListItem.style = {
     width: System.width / 10 * 9,
     height: System.height / 9,
     background: new Background({color: 0xffffffff}),
+    foreground: new Foreground({color: 0xff000000, fontSize: System.height/30}),
+    pressed: {
+        background: new Background({color: 0xff000000}),
+        foreground: new Foreground({color: 0xffffffff, fontSize: System.height/30}),
+    }
+}
+
+TileView.style = {
+    background: new Background({color: 0xffffffff}),
+}
+
+TileItem.style = {
+    width: System.width / 10 * 9,
+    height: System.height / 4,
+    background: new Background({color: 0xff000000, style:#stroke}),
     foreground: new Foreground({color: 0xff000000, fontSize: System.height/30}),
     pressed: {
         background: new Background({color: 0xff000000}),

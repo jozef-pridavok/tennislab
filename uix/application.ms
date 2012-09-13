@@ -95,6 +95,15 @@ class Application : BaseClass
                 form.keyReleased(key);
             return true;
         }
+        this._window.onOrientationChanged = function(sender, orientation)
+        {
+            var self = this super;
+            if (typeof self.orientationChanged == #function)
+                self.orientationChanged(orientation);
+            var form = self._forms.length > 0 ? self._forms[self._forms.length - 1] : null;
+            if (form)
+                form.orientationChanged(orientation);
+        }
 
         /*
         this._layout = new Moscrif.StackLayout();
@@ -285,13 +294,17 @@ logI(k, v);
 
     function drawDefault(canvas)
     {
-        canvas.clear(0xffffffff);
-        //return Application.skin.drawApplication(canvas, this);
+        //canvas.clear(0xffffffff);
+        return Application.skin.drawApplication(canvas, this);
     }
 
     function invalidate()
     {
         this._window.invalidate();
+    }
+
+    function orientationChanged(orientation)
+    {
     }
 
     function _setTransition(transition)

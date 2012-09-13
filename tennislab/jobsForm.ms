@@ -1,5 +1,6 @@
 include "lib://uix/form.ms"
 include "lib://uix/list/listView.ms"
+include "lib://uix/tile/tileView.ms"
 include "lib://uix/title/titleBar.ms"
 include "lib://uix/transition/slideToRight.ms"
 include "lib://uix/transition/slideToTop.ms"
@@ -10,6 +11,7 @@ include "app://accountForm.ms"
 class JobsForm : Form
 {
     var singleton = null;
+    var isTablet = System.IS_TABLET;
 
     function create(options = {})
     {
@@ -28,7 +30,8 @@ class JobsForm : Form
     function init()
     {
         super.init();
-        this._list = new ListView({name:"listView", stretch: #both});
+        var clazz = isTablet ? TileView : ListView;
+        this._list = new clazz({name:"listView", stretch: #both});
         this.add(new TitleBar({name:"titleBar", text:"Jobs",
             //titleOffset: System.width/12,
             //labelAlign: #center,
@@ -67,6 +70,14 @@ class JobsForm : Form
             Application.instance.quit();
     }
 
+    function orientationChanged(orientation)
+    {
+        if (isTablet) {
+            this._list._layout.columns = orientation == #portrait ? 2 : 3;
+        }
+        super.orientationChanged(orientation);
+    }
+
     function _update()
     {
         var self = this;
@@ -74,16 +85,17 @@ class JobsForm : Form
         self._list.removeAll();
         self._list.beginWait();
         var reload;
+        var clazz = isTablet ? TileItem : ListItem;
         function fillJobs(jobs) {
             self._jobs = jobs;
             self._list.endWait();
             self._list.suspendLayout();
             for (var job in jobs) {
-                var item = new ListItem({name:job["id"].toString(), text:job["title"], description:job["deadlineDate"], job:job });
+                var item = new clazz({name:job["id"].toString(), text:job["title"], description:job["deadlineDate"], job:job });
                 item.onClick = function() { self._jobClicked(this); };
                 self._list.add(item);
             }
-            var item = new ListItem({name:"refresh", text:"Refresh", description:"tap here to reaload data", kind:#refresh });
+            var item = new clazz({name:"refresh", text:"Refresh", description:"tap here to reaload data", kind:#refresh });
             item.onClick = function() { self._jobs = null; self._list.removeAll(); reload(); };
             self._list.add(item);
 

@@ -26,13 +26,19 @@ class GridLayout : Layout
     property rows(v)
     {
         get return this._rows;
-        set this._rows = v;
+        set {
+            assert v > 0;
+            this._rows = v;
+        }
     }
 
     property columns(v)
     {
         get return this._columns;
-        set this._columns = v;
+        set {
+            assert v > 0;
+            this._columns = v;
+        }
     }
 
     property vertSpace(v)
@@ -47,11 +53,25 @@ class GridLayout : Layout
         set this._horzSpace = v;
     }
 
+    property width(v)
+    {
+        get return this._width;
+        set this._width = v;
+    }
+
+    property height(v)
+    {
+        get return this._height;
+        set this._height = v;
+    }
+
     function performLayout(parent, children)
     {
         super.performLayout(parent, children);
-        var rowSpace = parent.height / this._rows;
-        var colSpace = parent.width / this._columns;
+        var width = this._width || parent.width;
+        var height = this._height || parent.height;
+        var rowSpace = (height - this._vertSpace) / this._rows;
+        var colSpace = (width - this._horzSpace) / this._columns;
         for (var r = 0; r < this._rows; r++) {
             for (var c = 0; c < this._columns; c++) {
                 for (var child in children) {
@@ -63,8 +83,8 @@ class GridLayout : Layout
                     if (cr == r && ch == c) {
                         child.left = c * colSpace + this._horzSpace;
                         child.top = r * rowSpace + this._vertSpace;
-                        child.width = colSpace - 2 * this._horzSpace;
-                        child.height = rowSpace - 2 * this._vertSpace;
+                        child.width = colSpace - 1 * this._horzSpace;
+                        child.height = rowSpace - 1 * this._vertSpace;
                     }
                 }
             }

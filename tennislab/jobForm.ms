@@ -45,7 +45,7 @@ class JobForm : Form
         this.add(this._detail);
 
         var style = JobForm.style;
-        var piece = System.width / 15;
+        var piece =  Integer.min(System.width, System.height) / 15;
         this._scrollContent = new Moscrif.View();
         this._scrollContent.left = this._scrollContent.top = 0;
         this._scrollContent.height = 1000;

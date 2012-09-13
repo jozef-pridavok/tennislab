@@ -25,6 +25,7 @@ class TopSpinJobs : Application
     function init()
     {
         super.init();
+        //this.orientation = [#portrait, #landscape-left];
         // apply custom skin
         Application.skin = new TopSpinSkin();
     }
@@ -55,6 +56,12 @@ class TopSpinJobs : Application
                 }
             );
     }
+
+    function orientationChanged(orientation)
+    {
+        //this.performLayout(true);
+    }
+
 }
 
 new TopSpinJobs().run();

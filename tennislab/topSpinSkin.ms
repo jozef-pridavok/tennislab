@@ -58,10 +58,13 @@ class TopSpinSkin : Skin
         var fg = TitleItem.style.foreground.native;
         var radius = System.width / 100;
         var delta = titleItem.pressed ? Skin.pressedDelta : 0;
-        if (titleItem.kind == #back)
-            canvas.drawBitmapNine(titleItem.pressed ? Res.img.titleItemBD : Res.img.titleItemBN, 0, 0, titleItem.width, titleItem.height);
-        else
+        if (titleItem.kind == #back) {
+            var h = Res.img.titleItemBD.width / 2;
+            var v = Res.img.titleItemBD.height / 10;
+            canvas.drawBitmapNine(titleItem.pressed ? Res.img.titleItemBD : Res.img.titleItemBN, 0, 0, titleItem.width, titleItem.height, null, 50, 0, 0, 0);
+        } else {
             canvas.drawBitmapNine(titleItem.pressed ? Res.img.titleItemD : Res.img.titleItemN, 0, 0, titleItem.width, titleItem.height);
+        }
         if (titleItem.image instanceof Bitmap)
             canvas.drawBitmap(titleItem.image, (titleItem.width - titleItem.image.width) / 2, (titleItem.height - titleItem.image.height) / 2);
         else {
@@ -102,6 +105,36 @@ class TopSpinSkin : Skin
             canvas.drawBitmap(Res.img.arrow, listItem.width - Res.img.arrow.width - System.width/30 + delta, (listItem.height - Res.img.arrow.height)/2 + delta);
     }
 
+    function drawTileView(canvas, tiles)
+    {
+    }
+
+    function drawTileItem(canvas, tileItem)
+    {
+        assert tileItem instanceof TileItem;
+        var style = tileItem.pressed ? TileItem.style.pressed : TileItem.style;
+        var bg = style.background.native;
+        var fg = style.foreground.native;
+        var isRefresh = tileItem.kind == #refresh;
+        var (tw, th) = fg.measureText(tileItem.text);
+        var delta = tileItem.pressed ? Skin.pressedDelta : 0;
+        canvas.drawRect(0, 0, tileItem.width, tileItem.height, bg);
+        if (isRefresh) {
+            fg = ListItem.style.foreground3.native;
+            canvas.drawTextBox(tileItem.text, 10 + delta, 10 + delta, tileItem.width, tileItem.height, fg, #center);
+            return;
+        }
+        canvas.drawTextBox(tileItem.text, 10 + delta, 10 + delta, tileItem.width, tileItem.height, fg);
+
+        fg = style.foreground2.native;
+        var text = tileItem.description || "";
+        (tw, th) = fg.measureText(text);
+        th = fg.fontBottom - fg.fontTop;
+        if (text.length > 50) text = text.substr(0, 50) + "...";
+        canvas.drawText(text, tileItem.width - gap + delta - tw, tileItem.height - th + gap + delta, fg);
+
+    }
+
 }
 
 Label.style.foreground = new Foreground({color: 0xff000000, fontSize: System.height/30});
@@ -119,6 +152,14 @@ ListItem.style.foreground2 = new Foreground({color: 0xff000000, fontSize: System
 ListItem.style.foreground3 = new Foreground({color: 0xffdadada, fontSize: System.height/50, textAlign:#center});
 ListItem.style.pressed.foreground = ListItem.style.foreground;
 ListItem.style.pressed.foreground2 = ListItem.style.foreground2;
+
+TileItem.style.height = System.height / 6;
+TileItem.style.foreground = new Foreground({color: 0xff000000, fontSize: System.height/30});
+TileItem.style.foreground2 = new Foreground({color: 0xffdadada, fontSize: System.height/50});
+TileItem.style.foreground3 = new Foreground({color: 0xffdadada, fontSize: System.height/50, textAlign:#center});
+TileItem.style.pressed.background = TileItem.style.background;
+TileItem.style.pressed.foreground = TileItem.style.foreground;
+TileItem.style.pressed.foreground2 = TileItem.style.foreground2;
 
 JobForm.style = {
     title: new Foreground({color: 0xff000000, fontSize: System.height/30}),
