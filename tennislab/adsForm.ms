@@ -108,6 +108,6 @@ class AdsForm : Form
 
     function _showAccount()
     {
-        Application.instance.push(AccountForm.create(), new SlideToTop());
+        Application.instance.push(AccountForm.create(), new SlideToLeft());
     }
 }

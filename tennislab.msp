@@ -33,6 +33,7 @@
         <property name="storepassword" value="" />
         <property name="supportedDevices" value="universal" />
         <property name="permission" value="&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;" />
+        <property name="bundleIdentifier" value="com.com.quellement.tennislab.tennislab" />
       </publishProperties>
       <includes>
         <fonts>
@@ -53,6 +54,7 @@
         <property name="supportedDevices" value="armv7a" />
         <property name="installLocation" value="preferExternal" />
         <property name="permission" value="&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;&#xA;&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;" />
+        <property name="bundleIdentifier" value="com.com.quellement.tennislab.tennislab" />
       </publishProperties>
       <includes>
         <fonts>
@@ -66,7 +68,7 @@
       <publishProperties>
         <property name="icon" value="" />
         <property name="splash" value="" />
-        <property name="codeSigningIdentity" value="iPhone Developer: Jozef Pridavok (ENR9MZF3YM)" />
+        <property name="codeSigningIdentity" value="iPhone Distribution: Quellement Inc." />
         <property name="supportedDevices" value="universal" />
         <property name="icon3gs" value="" />
         <property name="icon4+" value="$(project_dir)/platform/tenislab_icon_retina_iphone.png" />
@@ -75,6 +77,14 @@
         <property name="splash4+" value="$(project_dir)/platform/splash_iphone.png" />
         <property name="splashTablet" value="$(project_dir)/platform/splash_ipad.png" />
         <property name="bundleIdentifier" value="com.quellement.tennislab" />
+        <property name="iPhone4-icon" value="$(project_dir)/platform/tenislab_icon_retina_iphone.png" />
+        <property name="iPhone4-splash" value="$(project_dir)/platform/splash_iphone.png" />
+        <property name="iPhone5-icon" value="$(project_dir)/platform/tenislab_icon_retina_iphone.png" />
+        <property name="iPhone5-splash" value="$(project_dir)/platform/splash_iphone5.png" />
+        <property name="iPad-icon" value="$(project_dir)/platform/tenislab_icon_ipad.png" />
+        <property name="iPad-splash" value="$(project_dir)/platform/splash_ipad.png" />
+        <property name="newiPad-icon" value="$(project_dir)/platform/tenislab_icon_the_new_ipad.png" />
+        <property name="newiPad-splash" value="&lt;none&gt;" />
       </publishProperties>
       <includes>
         <fonts>

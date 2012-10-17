@@ -91,9 +91,9 @@ class AccountLoginControl : Control
                 Settings.accountType = accountType;
                 Settings.save();
                 if (Settings.accountType == 100)
-                    Application.instance.push(AdsForm.create({name:"AdsForm"}), new SlideToBottom());
+                    Application.instance.push(AdsForm.create({name:"AdsForm"}), new SlideToRight());
                 else
-                    Application.instance.push(JobsForm.create({name:"JobsForm"}), new SlideToBottom());
+                    Application.instance.push(JobsForm.create({name:"JobsForm"}), new SlideToRight());
                     //Application.instance.pop(new SlideToRight());
             },
             function (error) {

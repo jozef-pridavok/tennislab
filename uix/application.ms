@@ -247,6 +247,12 @@ logI(k, v);
         }
         if (transition)
             transition.pop(currentForm, previousForm);
+        else {
+            if (currentForm)
+                currentForm.left = System.width;
+            if (previousForm)
+                previousForm.left = 0;
+        }
     }
 
     function requestKeyboard(callback, keyboardType = #default)

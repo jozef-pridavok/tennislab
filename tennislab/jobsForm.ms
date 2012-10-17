@@ -11,7 +11,7 @@ include "app://accountForm.ms"
 class JobsForm : Form
 {
     var singleton = null;
-    var isTablet = System.IS_TABLET;
+    var isTablet = false; //System.IS_TABLET;
 
     function create(options = {})
     {
@@ -139,6 +139,6 @@ class JobsForm : Form
 
     function _showAccount()
     {
-        Application.instance.push(AccountForm.create(), new SlideToTop());
+        Application.instance.push(AccountForm.create(), new SlideToLeft());
     }
 }
